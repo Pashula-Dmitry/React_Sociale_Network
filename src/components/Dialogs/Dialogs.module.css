@@ -1,1 +1,35 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
 
+.dialogsItems {
+    padding: 10px;
+
+
+}
+
+.dialogsItems .active {
+    color: gold;
+}
+.dialog{
+    display: flex;
+    flex-direction: row;
+}
+
+.dialog > div > img{
+    max-width: 25px;
+    max-height: 25px;
+    display: inline;
+}
+
+
+
+
+.messages {
+    padding: 10px;
+}
+
+.messages .massage {
+    color: white;
+}

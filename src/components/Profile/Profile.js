@@ -1,15 +1,14 @@
 import React from 'react';
 import classes from './Profile.module.css';
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
-const  Profile  = () => {
+const  Profile  = (props) => {
+
     return (
         <div>
-            <div>
-                <img src="https://strana.ua/img/article/2625/70_main.jpeg" alt=""/>
-            </div>
-            <div>ava + description</div>
-            <MyPosts />
+            <ProfileInfo/>
+            <MyPosts postsData={props.localState.postsData}/>
         </div>
     )
 };

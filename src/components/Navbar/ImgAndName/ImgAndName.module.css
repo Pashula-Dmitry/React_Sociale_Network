@@ -1,0 +1,12 @@
+.friends {
+    display: flex;
+    flex-direction: column;
+    padding-right: 7px;
+}
+
+.friends > a> img{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
