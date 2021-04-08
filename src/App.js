@@ -10,12 +10,8 @@ import Setting from "./components/Setting/Setting";
 import {BrowserRouter, Route} from "react-router-dom";
 
 
-
 const App = (props) => {
-
-
     return (
-        <BrowserRouter>
             <div className="app-wrapper">
                 <Header/>
                 <Navbar localState={props.state.sideBar}/>
@@ -27,8 +23,7 @@ const App = (props) => {
                     <Route path="/Setting" render={ () => <Setting/>}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
-}
+};
 
 export default App;
