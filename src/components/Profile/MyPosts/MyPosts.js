@@ -13,12 +13,12 @@ const MyPosts = (props) => {
         /*let text = newPostElement.current.value; можно так, но нет смысла отправлять текст,
          когда у нас хронится эта же строка в state newPostText
          */
-        props.addPost();
+        props.dispatch({type: "ADD-POST"});
     };
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newLetter: text});
     };
 
     return (
