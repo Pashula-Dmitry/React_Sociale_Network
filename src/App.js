@@ -12,6 +12,7 @@ import {addMessage, addPost, updateNewPostText} from "./redux/state";
 
 
 const App = (props) => {
+    debugger;
     return (
             <div className="app-wrapper">
                 <Header/>
