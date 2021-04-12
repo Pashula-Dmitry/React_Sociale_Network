@@ -1,7 +1,9 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
-import {addPost, updateNewPostText} from "../../../redux/state";
+import {addPostActionCreator, updateNewPostActionCreator} from "../../../redux/state";
+
+
 
 const MyPosts = (props) => {
 
@@ -13,12 +15,13 @@ const MyPosts = (props) => {
         /*let text = newPostElement.current.value; можно так, но нет смысла отправлять текст,
          когда у нас хронится эта же строка в state newPostText
          */
-        props.dispatch({type: "ADD-POST"});
+        props.dispatch(addPostActionCreator());
     };
 
     let onPostChange = () => {
         let text = newPostElement.current.value;
-        props.dispatch({type: "UPDATE-NEW-POST-TEXT", newLetter: text});
+        let action = updateNewPostActionCreator(text);
+        props.dispatch(action);
     };
 
     return (
