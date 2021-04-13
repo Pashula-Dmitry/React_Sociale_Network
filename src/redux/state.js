@@ -48,7 +48,6 @@ let store = {
         console.log('State changed');
     },
 
-
     getState() {
         return this._state;
     },
