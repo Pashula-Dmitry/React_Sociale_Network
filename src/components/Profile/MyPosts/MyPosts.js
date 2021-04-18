@@ -11,17 +11,18 @@ const MyPosts = (props) => {
 
     let newPostElement = React.createRef();
 
-    let addPost = () => {
+    let onAddPost = () => {
         /*let text = newPostElement.current.value; можно так, но нет смысла отправлять текст,
          когда у нас хронится эта же строка в state newPostText
          */
-        props.dispatch(addPostActionCreator());
+        props.addPost();
     };
 
     let onPostChange = (event) => {
         let text = event.target.value;
-        let action = updateNewPostActionCreator(text);
-        props.dispatch(action);
+        props.updateNewPostText(text);
+        //let action = updateNewPostActionCreator(text);
+        //props.dispatch(action);
     };
 
     return (
@@ -32,7 +33,7 @@ const MyPosts = (props) => {
                     <textarea onChange={onPostChange}  value={props.newPostText}/>
                 </div>
                 <div>
-                <button onClick={ addPost }>Add post</button>
+                <button onClick={ onAddPost }>Add post</button>
                 </div>
             </div>
 

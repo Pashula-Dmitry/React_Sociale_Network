@@ -8,20 +8,20 @@ import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redu
 
 
 const Dialogs = (props) => {
-
-    const DialogItems = props.localState.dialogsData.map(el => <DialogItem name={el.name} id={el.id}/>);
-    const Messages = props.localState.messagesData.map(el => <Message text={el.message}/>);
+let state = props.dialogsPage;
+    const DialogItems = state.dialogsData.map(el => <DialogItem name={el.name} id={el.id}/>);
+    const Messages = state.messagesData.map(el => <Message text={el.message}/>);
 
     //let newRefTextarea = React.createRef(); не делай так, у событий есть event.target
 
     let addMessage = () => {
-      props.dispatch(addMessageActionCreator());
+        props.addMessage();
     };
 
     let onMessageChange = (event) => {
         //let out  = newRefTextarea.current.value;
         let out = event.target.value;
-        props.dispatch(updateNewMessageActionCreator(out));
+        props.updateNewMessage(out);
     };
 
     return (
@@ -31,7 +31,7 @@ const Dialogs = (props) => {
             </div>
             <div className={s.messages}>
                 {Messages}
-                <textarea onChange={onMessageChange}  value={props.localState.newMessageText}></textarea>
+                <textarea onChange={onMessageChange}  value={state.newMessageText}></textarea>
                 <button onClick={addMessage}>Send </button>
             </div>
         </div>
