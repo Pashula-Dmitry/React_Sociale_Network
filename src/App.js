@@ -3,12 +3,12 @@ import './App.css';
 import Header from "./components/Header/Header.js";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
-import Dialogs from "./components/Dialogs/Dialogs";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Setting from "./components/Setting/Setting";
 import {BrowserRouter, Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 const App = (props) => {
@@ -22,6 +22,7 @@ const App = (props) => {
                     <Route path="/News" render={ () => <News/>}/>
                     <Route path="/Music" render={ () => <Music/>}/>
                     <Route path="/Setting" render={ () => <Setting/>}/>
+                    <Route path="/Users" render={ () => <UsersContainer/>}/>
                 </div>
             </div>
     );
