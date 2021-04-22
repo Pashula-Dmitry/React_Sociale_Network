@@ -9,8 +9,8 @@ import {addMessageActionCreator, updateNewMessageActionCreator} from "../../redu
 
 const Dialogs = (props) => {
 let state = props.dialogsPage;
-    const DialogItems = state.dialogsData.map(el => <DialogItem name={el.name} id={el.id}/>);
-    const Messages = state.messagesData.map(el => <Message text={el.message}/>);
+    const DialogItems = state.dialogsData.map(el => <DialogItem name={el.name} key={el.id} id={el.id}/>);
+    const Messages = state.messagesData.map(el => <Message text={el.message} key={el.id}/>);
 
     //let newRefTextarea = React.createRef(); не делай так, у событий есть event.target
 
