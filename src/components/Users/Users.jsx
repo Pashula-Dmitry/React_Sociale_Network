@@ -1,33 +1,45 @@
 import React from "react";
 import * as axios from "axios";
 import userPhoto from "../../assets/images/user.png";
+import classes from "./users.module.css";
+
 
 const Users = (props) => {
-    let getUsers = () => {
-        if(props.users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    props.setUsers(response.data.items);
-                });
-        }
-    };
+    console.log(props);
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
+    }
 
     return (<div>
-        <button onClick={getUsers}>Get Users</button>
+        <div>
+            {pages.map((current, index) => (current > 10) ? undefined : <span onClick={(event) => {
+                props.onPageChanged(current)
+            }} className={props.currentPage === current && classes.selectedPage}>
+                    {current} </span>)
+            }
+
+        </div>
         {props.users.map((u) => <div key={u.id}>
         <span>
             <div>
-                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" style={ {width: "100px", height: "125px"} }/>
+                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt=""
+                     style={{width: "100px", height: "125px"}}/>
             </div>
             <div>
                 {
                     u.followed
-                        ? <button onClick={() => { props.Unfollow(u.id) }}>Unfollow</button>
-                        : <button onClick={() => {props.Follow(u.id)}}>Follow</button>}
+                        ? <button onClick={() => {
+                            props.Unfollow(u.id)
+                        }}>Unfollow</button>
+                        : <button onClick={() => {
+                            props.Follow(u.id)
+                        }}>Follow</button>}
 
             </div>
         </span>
-        <span>
+            <span>
             <span>
                 <div>{u.name}</div>
                 <div>{u.status}</div>
@@ -39,6 +51,7 @@ const Users = (props) => {
         </span>
         </div>)}
 
-    </div>);
+    </div>)
 };
+
 export default Users;
