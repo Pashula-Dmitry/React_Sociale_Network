@@ -2,10 +2,11 @@ import React from "react";
 import * as axios from "axios";
 import userPhoto from "../../assets/images/user.png";
 import classes from "./users.module.css";
+import {NavLink} from "react-router-dom";
+
 
 
 const Users = (props) => {
-    console.log(props);
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
@@ -24,8 +25,10 @@ const Users = (props) => {
         {props.users.map((u) => <div key={u.id}>
         <span>
             <div>
-                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt=""
-                     style={{width: "100px", height: "125px"}}/>
+                <NavLink to={'/Profile/' + u.id}>
+                    <img src={u.photos.small != null ? u.photos.small : userPhoto} alt=""
+                         style={{width: "100px", height: "125px"}}/>
+                </NavLink>
             </div>
             <div>
                 {
@@ -34,6 +37,7 @@ const Users = (props) => {
                             props.Unfollow(u.id)
                         }}>Unfollow</button>
                         : <button onClick={() => {
+                            debugger;
                             props.Follow(u.id)
                         }}>Follow</button>}
 
