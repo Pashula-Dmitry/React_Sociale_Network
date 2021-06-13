@@ -3,6 +3,7 @@ import * as axios from "axios";
 import userPhoto from "../../assets/images/user.png";
 import classes from "./users.module.css";
 import {NavLink} from "react-router-dom";
+import {followAPI} from "../../Api";
 
 
 
@@ -33,13 +34,27 @@ const Users = (props) => {
             <div>
                 {
                     u.followed
-                        ? <button onClick={() => {
-                            props.Unfollow(u.id)
+                        ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.toggleIsFetching(true, u.id);
+                            followAPI.unfollow(u.id)
+                            .then(data => {
+                                  if(data.resultCode === 0) {
+                                      props.Unfollow(u.id);
+                                  }
+                                props.toggleIsFetching(false, u.id);
+                             });
                         }}>Unfollow</button>
-                        : <button onClick={() => {
-                            debugger;
-                            props.Follow(u.id)
-                        }}>Follow</button>}
+                        : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
+                            props.toggleIsFetching(true, u.id);
+                            followAPI.follow(u.id).then((data) =>{
+                                   if(data.resultCode === 0){
+                                       props.Follow(u.id);
+                                   }
+                                props.toggleIsFetching(false, u.id);
+                                });
+
+                        }}>Follow</button>
+                }
 
             </div>
         </span>

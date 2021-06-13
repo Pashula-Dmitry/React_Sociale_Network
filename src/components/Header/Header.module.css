@@ -7,3 +7,13 @@
 .header img {
     width: 20px;
 }
+
+.loginBlock {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.loginBlock a {
+    color: white;
+}
