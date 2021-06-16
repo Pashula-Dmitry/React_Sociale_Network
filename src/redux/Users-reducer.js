@@ -1,3 +1,5 @@
+import {followAPI, usersAPI} from "../Api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -72,3 +74,43 @@ export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, current
 export const setTotalUsersCount = (totalCount) => ({type: SET_USERS_TOTAL_COUNT, totalCount});
 export const setValuePreloader = (isPreloader) => ({type: SET_VALUE_PRELOADER, isPreloader});
 export const toggleIsFetching = (isFetching, idUser) => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, idUser});
+
+// REDUX-THUNKS
+
+export const getUsers = (currentPage, pageSize) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(currentPage));
+        dispatch(setValuePreloader(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setValuePreloader(false));
+                dispatch(setUsers(data.items));
+                dispatch(setTotalUsersCount(data.totalCount));
+            }).catch(error => console.log(error));
+    }
+};
+export const unfollow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true, userId));
+        followAPI.unfollow(userId)
+            .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(unFollowAC(userId));
+                }
+                dispatch(toggleIsFetching(false, userId));
+            });
+    }
+};
+
+export const follow = (userId) => {
+    return (dispatch) => {
+        dispatch(toggleIsFetching(true, userId));
+        followAPI.follow(userId)
+            .then(data => {
+                if(data.resultCode === 0) {
+                    dispatch(followAC(userId));
+                }
+                dispatch(toggleIsFetching(false, userId));
+            });
+    }
+};
