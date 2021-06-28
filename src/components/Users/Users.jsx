@@ -1,5 +1,4 @@
 import React from "react";
-import * as axios from "axios";
 import userPhoto from "../../assets/images/user.png";
 import classes from "./users.module.css";
 import {NavLink} from "react-router-dom";
@@ -39,7 +38,6 @@ const Users = (props) => {
                             props.follow(u.id);
                         }}>Follow</button>
                 }
-
             </div>
         </span>
             <span>
