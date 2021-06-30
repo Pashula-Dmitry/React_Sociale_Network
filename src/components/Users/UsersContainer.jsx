@@ -13,23 +13,13 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize);
-        /*this.props.setValuePreloader(true);
-        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
-            .then(data => {
-                this.props.setValuePreloader(false);
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
 
-            }).catch(error => console.log(error));*/
     }
-
-   /* componentWillUnmount() {
-        alert("i'm dead");
-    }*/
 
     onPageChanged = (pageNumber) => {
         this.props.getUsers(pageNumber, this.props.pageSize);
     };
+
     render = () => {
         return <>
             {(this.props.isFetching) ? <Preloader/> : null}
@@ -46,7 +36,6 @@ class UsersContainer extends React.Component {
     }
 }
 
-
 const mapStateToProps = (state) => {
     return {
         users: state.usersPage.users,
@@ -58,29 +47,6 @@ const mapStateToProps = (state) => {
     }
 };
 
-
-/*const mapDispatchToProps = (dispatch) => {
-    return {
-        Follow: (userId) => {
-            dispatch(followAC(userId));
-        },
-        Unfollow: (userId) => {
-            dispatch(unFollowAC(userId));
-        },
-        setUsers: (users) => {
-            dispatch(setUsersAC(users));
-        },
-        setCurrentPage: (current) => {
-            dispatch(setCurrentPageAC(current))
-        },
-        setTotalUsersCount: (totalUsersCount) => {
-            dispatch(setTotalUsersCountAC(totalUsersCount))
-        },
-        setValuePrealoader: (isPrealoader) => {
-            dispatch(setValuePrealoaderAC(isPrealoader));
-        }
-    }
-};*/
 
 
 export default compose(connect(mapStateToProps, {getUsers, unfollow, follow,}),
