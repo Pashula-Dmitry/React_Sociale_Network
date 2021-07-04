@@ -1,8 +1,8 @@
-import {usersAPI} from "../Api";
+import {profileAPI, usersAPI} from "../Api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_PROFILE_USER = 'SET_PROFILE_USER';
+const SET_USER_STATUS = 'SET_USER_STATUS';
 
 
 let initialState = {
@@ -15,8 +15,8 @@ let initialState = {
         {id: 6, countLikes: 2000, message: "have nice day!"},
         {id: 7, countLikes: 1, message: "Just for example comments"}
     ],
-    newPostText: "it-kamasutra",
     profile: null,
+    status: "",
 };
 
 const profilePageReducer = (state = initialState, action) => {
@@ -24,20 +24,19 @@ const profilePageReducer = (state = initialState, action) => {
         case ADD_POST: {
             return {
                 ...state,
-                postsData: [...state.postsData, {id: 8, message: state.newPostText, countLikes: 122}],
-                newPostText: ''
-            };
-        }
-        case UPDATE_NEW_POST_TEXT: {
-            return {
-                ...state,
-                newPostText: action.newLetter
+                postsData: [...state.postsData, {id: 8, message: action.newPostBody, countLikes: 122}],
             };
         }
         case SET_PROFILE_USER: {
             return {
                 ...state,
                 profile: action.profile
+            };
+        }
+        case SET_USER_STATUS: {
+            return {
+                ...state,
+                status: action.status
             };
         }
         default:
@@ -49,7 +48,7 @@ const profilePageReducer = (state = initialState, action) => {
 export default profilePageReducer;
 
 
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = (newPostBody) => ({type: ADD_POST, newPostBody});
 export const setProfileUser = (profile) => ({type: SET_PROFILE_USER, profile});
 export const getProfileUser = (userId) => {
     return (dispatch) => {
@@ -59,5 +58,22 @@ export const getProfileUser = (userId) => {
             }).catch(error => console.log(error));
     }
 };
-export const updateNewPostActionCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newLetter: text});
+export const getUserStatus = (userId) => {
+    return (dispatch) => {
+        profileAPI.getStatus(userId)
+            .then(response => {
+                dispatch(setUserStatus(response.data));
+            }).catch(error => console.log(error));
+    }
+};
+export const updateUserStatus = (status) => {
+    return (dispatch) => {
+        profileAPI.updateStatus(status)
+            .then(response => {
+                if(response.data.resultCode === 0)
+                dispatch(setUserStatus(status));
+            }).catch(error => console.log(error));
+    }
+};
+export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status});
 

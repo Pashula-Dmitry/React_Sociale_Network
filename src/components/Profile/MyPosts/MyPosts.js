@@ -1,47 +1,54 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import Post from './Post/Post';
-import {addPostActionCreator, updateNewPostActionCreator} from "../../../redux/profilePage-reducer";
-
+import {Field, Form, Formik} from "formik";
 
 
 const MyPosts = (props) => {
 
     const postsElements = props.postsData.map(el => <Post countLikes={el.countLikes} message={el.message}/>);
 
-    let newPostElement = React.createRef();
-
-    let onAddPost = () => {
-        /*let text = newPostElement.current.value; можно так, но нет смысла отправлять текст,
-         когда у нас хронится эта же строка в state newPostText
-         */
-        props.addPost();
-    };
-
-    let onPostChange = (event) => {
-        let text = event.target.value;
-        props.updateNewPostText(text);
-        //let action = updateNewPostActionCreator(text);
-        //props.dispatch(action);
-    };
-
     return (
         <div className={classes.postsBlock}>
             <h3>my posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange}  value={props.newPostText}/>
-                </div>
-                <div>
-                <button onClick={ onAddPost }>Add post</button>
-                </div>
-            </div>
-
+            <FormPost addPost={props.addPost}/>
             <div className={classes.posts}>
                 {postsElements}
             </div>
         </div>
     )
 };
+
+
+const FormPost = (props) => {
+
+    const submitFormik = (values, {setSubmitting}) => {
+        alert(JSON.stringify(values.textarea));
+        setSubmitting(false);
+        props.addPost(values.textarea);
+    };
+
+    return (
+        <Formik
+            initialValues={{textarea: ''}}
+            onSubmit={submitFormik}
+            validateOnBlur
+        >
+            {({isSubmitting, isValid, dirty}) => (
+                <Form>
+                    <div>
+                        <Field as={'textarea'} name="textarea"/>
+                    </div>
+                    <div>
+                        <button type="submit" disabled={isSubmitting && !isValid && !dirty}>
+                            Send
+                        </button>
+                    </div>
+                </Form>
+            )}
+        </Formik>
+    );
+};
+
 
 export default MyPosts;
