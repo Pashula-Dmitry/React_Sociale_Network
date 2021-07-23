@@ -4,7 +4,6 @@ import classes from "./users.module.css";
 import {NavLink} from "react-router-dom";
 
 
-
 const Users = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
@@ -14,10 +13,11 @@ const Users = (props) => {
 
     return (<div>
         <div>
-            {pages.map((current, index) => (current > 60) ? undefined : <span onClick={(event) => {
+            {pages.map((current) => (current > 60) ? undefined : <span onClick={() => {
                 props.onPageChanged(current)
             }} className={props.currentPage === current && classes.selectedPage}>
                     {current} </span>)
+            }
             }
 
         </div>
@@ -33,14 +33,15 @@ const Users = (props) => {
                 {
                     u.followed
                         ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
-                            props.unfollow(u.id); }}>Unfollow</button>
+                            props.unfollow(u.id);
+                        }}>Unfollow</button>
                         : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {
                             props.follow(u.id);
                         }}>Follow</button>
                 }
             </div>
         </span>
-            <span>
+                <span>
             <span>
                 <div>{u.name}</div>
                 <div>{u.status}</div>
@@ -50,7 +51,8 @@ const Users = (props) => {
                 <div>{"u.location.city"}</div>
             </span>
         </span>
-        </div>)}
+            </div>
+        )}
 
     </div>)
 };

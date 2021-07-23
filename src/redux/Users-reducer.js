@@ -77,7 +77,7 @@ export const toggleIsFetching = (isFetching, idUser) => ({type: TOGGLE_IS_FOLLOW
 
 // REDUX-THUNKS
 
-export const getUsers = (currentPage, pageSize) => {
+export const requestUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(setCurrentPage(currentPage));
         dispatch(setValuePreloader(true));

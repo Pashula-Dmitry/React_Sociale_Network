@@ -12,10 +12,11 @@ class Status extends React.Component {
            editMode: true
        })
     };
+
     deactivateEditMode = () => {
        this.setState({
            editMode: false
-       })
+       });
         this.props.updateUserStatus(this.state.status);
     };
     onStatusChenge = (e) => {
