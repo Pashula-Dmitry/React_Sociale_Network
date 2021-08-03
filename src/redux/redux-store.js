@@ -6,8 +6,9 @@ import usersPageReducer from "./Users-reducer";
 import authReducer from "./authReducer";
 import thunkMiddleware from "redux-thunk";
 import appReducer from "./appReducer";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage  : profilePageReducer,
     messagesPage : messagesPageReducer,
     sideBar      : sideBarReducer,
@@ -16,7 +17,7 @@ let reducers = combineReducers({
     app          : appReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+let store = createStore(rootReducer, composeWithDevTools( applyMiddleware(thunkMiddleware) ));
 
 window.store = store;
 

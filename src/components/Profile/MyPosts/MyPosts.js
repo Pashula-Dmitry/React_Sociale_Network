@@ -4,24 +4,24 @@ import Post from './Post/Post';
 import {Field, Form, Formik} from "formik";
 
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
+        console.log("RENDER MyPosts");
+        const postsElements = props.postsData.map((el, index) => <Post countLikes={el.countLikes} key={index + `${el}`} message={el.message}/>);
 
-    const postsElements = props.postsData.map(el => <Post countLikes={el.countLikes} message={el.message}/>);
-
-    return (
-        <div className={classes.postsBlock}>
-            <h3>my posts</h3>
-            <FormPost addPost={props.addPost}/>
-            <div className={classes.posts}>
-                {postsElements}
+        return (
+            <div className={classes.postsBlock}>
+                <h3>my posts</h3>
+                <FormPost addPost={props.addPost}/>
+                <div className={classes.posts}>
+                    {postsElements}
+                </div>
             </div>
-        </div>
-    )
-};
-
+        )
+    }
+);
 
 const FormPost = (props) => {
-
+    console.log("RENDER FormPost");
     const submitFormik = (values, {setSubmitting}) => {
         alert(JSON.stringify(values.textarea));
         setSubmitting(false);

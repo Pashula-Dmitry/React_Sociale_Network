@@ -1,12 +1,10 @@
 import React from "react";
-import preloader from "../../../assets/images/preloader.gif";
-
+import classes from "./preloader.module.css";
 
 
 const Preloader = (props) => {
     return (
-        <div style={ {backgroundColor: 'white'} }>
-            <img src={preloader} alt="not found" style={ {width: '100px', height: "100px"} }/>
+        <div className={classes.loading}>
         </div>
     )
 }
