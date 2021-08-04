@@ -31,7 +31,7 @@ const profilePageReducer = (state = initialState, action) => {
         case DELETE_POST: {
             return {
                 ...state,
-                postsData:  state.postsData.filter(p => p.id !== action.idPost),
+                postsData: state.postsData.filter(p => p.id !== action.idPost),
             };
         }
         case SET_PROFILE_USER: {
@@ -59,29 +59,37 @@ export const addPostActionCreator = (newPostBody) => ({type: ADD_POST, newPostBo
 export const deletePost = (idPost) => ({type: DELETE_POST, idPost});
 export const setProfileUser = (profile) => ({type: SET_PROFILE_USER, profile});
 export const getProfileUser = (userId) => {
-    return (dispatch) => {
-        usersAPI.getProfile(userId)
-            .then(response => {
-                dispatch(setProfileUser(response.data));
-            }).catch(error => console.log(error));
+    return async (dispatch) => {
+        try {
+            const response = await usersAPI.getProfile(userId);
+            dispatch(setProfileUser(response.data));
+        } catch (error) {
+            return console.log(error)
+        }
+
     }
 };
 export const getUserStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setUserStatus(response.data));
-            }).catch(error => console.log(error));
+    return async (dispatch) => {
+        try {
+            const response = await profileAPI.getStatus(userId)
+            dispatch(setUserStatus(response.data));
+        } catch (error) {
+            return console.log(error);
+        }
     }
 };
 export const updateUserStatus = (status) => {
-    return (dispatch) => {
-        profileAPI.updateStatus(status)
-            .then(response => {
-                if(response.data.resultCode === 0)
-                dispatch(setUserStatus(status));
-            }).catch(error => console.log(error));
+    return async (dispatch) => {
+        try {
+        const response = await profileAPI.updateStatus(status)
+                if (response.data.resultCode === 0)
+                    dispatch(setUserStatus(status));
+            }
+            catch(error) {
+            return console.log(error)
+        }
     }
 };
-export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status});
+export const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
 

@@ -4,16 +4,15 @@ import Navbar from "./components/Navbar/Navbar";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Setting from "./components/Setting/Setting";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/LoginContainer";
-import {connect, Provider} from "react-redux";
+import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
-import store from "./redux/redux-store";
 
 
 class App extends Component {
@@ -27,23 +26,21 @@ class App extends Component {
             return <Preloader/>;
 
         return (
-            <BrowserRouter>
-                <Provider store={store}>
-                    <div className="app-wrapper">
-                        <HeaderContainer/>
-                        <Navbar/>
-                        <div className="app-wrapper-content">
-                            <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
-                            <Route path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
-                            <Route path="/News" render={() => <News/>}/>
-                            <Route path="/Music" render={() => <Music/>}/>
-                            <Route path="/Setting" render={() => <Setting/>}/>
-                            <Route path="/Users" render={() => <UsersContainer/>}/>
-                            <Route path="/login" render={() => <LoginPage/>}/>
-                        </div>
-                    </div>
-                </Provider>
-            </BrowserRouter>
+
+            <div className="app-wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+                <div className="app-wrapper-content">
+                    <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
+                    <Route path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
+                    <Route path="/News" render={() => <News/>}/>
+                    <Route path="/Music" render={() => <Music/>}/>
+                    <Route path="/Setting" render={() => <Setting/>}/>
+                    <Route path="/Users" render={() => <UsersContainer/>}/>
+                    <Route path="/login" render={() => <LoginPage/>}/>
+                </div>
+            </div>
+
         );
     }
 }
