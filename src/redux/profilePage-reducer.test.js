@@ -13,7 +13,7 @@ let state = {
 };
 
 
-it('length of posts should be incremented', () => {
+it('leng ith of posts should bencremented', () => {
     // set of data
     const action = addPostActionCreator("React is cool technology");
     // action

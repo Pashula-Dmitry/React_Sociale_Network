@@ -1,4 +1,4 @@
-
+const THREE_FRIEND = "THREE_FRIEND";
 let initialState = {
     friends: [
         {id: 1, name: 'Dima'},
@@ -7,8 +7,13 @@ let initialState = {
     ]
 };
 const sideBarReducer = (state = initialState, action) => {
-return state;
-};
+    /*switch (action.type){
 
+        default:
+            return state;
+    }
+*/
+    return state;
+};
 
 export default sideBarReducer;
