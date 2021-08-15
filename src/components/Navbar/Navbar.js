@@ -5,9 +5,8 @@ import ImgAndName from "./ImgAndName/ImgAndName";
 import Post from "../Profile/MyPosts/Post/Post";
 
 const Navbar = (props) => {
+    const friends = props.sideBarFriends.map((el, index) => index > 2 ? null : <ImgAndName id={el.id} name={el.name}/>);
 
-
-    //const friends = props.localState.friends.map(el => <ImgAndName id={el.id} name={el.name}/>);
     return (
         <nav className={classes.nav}>
             <div className={classes.item}>
@@ -31,9 +30,8 @@ const Navbar = (props) => {
             <div className={classes.item}>
                     <h2>Friends</h2>
                 <div className={classes.flexx}>
-                    {/*{friends}*/}
+                    {friends}
                 </div>
-
             </div>
         </nav>
     )

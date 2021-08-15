@@ -1,5 +1,6 @@
 import {followAPI, usersAPI} from "../Api";
 import {updateObjectInArray} from "../helpers/updateObjectInArray";
+import {threeFrieds} from "./sideBar-reducer";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';

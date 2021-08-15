@@ -8,7 +8,7 @@ const ProfileInfo = ({profile, status, updateUserStatus}) => {
     if(!profile){
         return <Preloader/>
     }
-
+console.log(profile, status, updateUserStatus)
     return (
         <div>
             <div>

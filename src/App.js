@@ -13,6 +13,7 @@ import LoginPage from "./components/Login/LoginContainer";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/appReducer";
 import Preloader from "./components/common/Preloader/Preloader";
+import Test from "./Test";
 
 
 class App extends Component {
@@ -29,9 +30,10 @@ class App extends Component {
 
             <div className="app-wrapper">
                 <HeaderContainer/>
-                <Navbar/>
+                <Navbar sideBarFriends={this.props.sideBarFriends}/>
                 <div className="app-wrapper-content">
                     <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
+                    <Route path="/test" render={() => <Test/>}/>
                     <Route path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route path="/News" render={() => <News/>}/>
                     <Route path="/Music" render={() => <Music/>}/>
@@ -47,6 +49,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => ({
     initialized: state.app.initialized,
+    sideBarFriends: state.usersPage.users,
 });
 
 export default connect(mapStateToProps, {initializeApp})(App);
