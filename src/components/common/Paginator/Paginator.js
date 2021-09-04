@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Paginator.module.css";
+
 
 const Paginator = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -10,8 +10,10 @@ const Paginator = (props) => {
 
     return (
         <div>
-            { pages.map((current) => (current > 60) ? undefined : <span onClick={() => { props.onPageChanged(current) }
-            } className={props.currentPage === current && styles.selectedPage}>
+            {
+                pages.map((current) => (current > 60) ? undefined
+                    : <span onClick={ () => { props.onPageChanged(current) } }
+                            className={props.currentPage === current}>
                     {current} </span>)
             }
         </div>

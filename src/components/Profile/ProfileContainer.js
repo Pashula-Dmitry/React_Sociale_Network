@@ -1,7 +1,11 @@
 import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getProfileUser, getUserStatus, updateUserStatus} from "../../redux/profilePage-reducer";
+import {
+    getProfileUser,
+    getUserStatus,
+    updateUserStatus,
+} from "../../redux/profilePage-reducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 
@@ -43,8 +47,6 @@ class ProfileContainer extends React.Component {
     authorizedUserId: state.auth.userId,
     isAuth: state.auth.isAuth,
  });
-
-
 
 
 export default compose(
