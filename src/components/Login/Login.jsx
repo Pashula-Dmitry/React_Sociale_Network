@@ -2,6 +2,17 @@ import React from 'react';
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as yup from "yup"
 import {ValidationForm} from "../../helpers/validator";
+import {Redirect} from "react-router-dom";
+
+export const Login = ({isAuth, login }) => {
+    debugger
+    if(isAuth) return <Redirect to={"/profile"}/>
+    return (
+        <>
+            {!isAuth && <LoginForm login={login}/>}
+        </>
+    );
+};
 
 
 const LoginForm = ({login}) => {
@@ -14,7 +25,8 @@ const LoginForm = ({login}) => {
         alert(JSON.stringify(values));
         const {email, password, checkbox} = values;
         resetForm();
-        login(email, password, checkbox, setStatus, setSubmitting);
+        debugger
+       login(email, password, checkbox, setStatus, setSubmitting);
     };
     return (
         <Formik

@@ -32,7 +32,6 @@ class App extends Component {
                 <Navbar sideBarFriends={this.props.sideBarFriends}/>
                 <div className="app-wrapper-content">
                     <Route path="/Dialogs" render={() => <DialogsContainer/>}/>
-                    <Route path="/test" render={() => <Test/>}/>
                     <Route path="/Profile/:userId?" render={() => <ProfileContainer/>}/>
                     <Route path="/News" render={() => <News/>}/>
                     <Route path="/Music" render={() => <Music/>}/>

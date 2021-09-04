@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "./Paginator.module.css"
 
 
 const Paginator = (props) => {
@@ -13,7 +14,7 @@ const Paginator = (props) => {
             {
                 pages.map((current) => (current > 60) ? undefined
                     : <span onClick={ () => { props.onPageChanged(current) } }
-                            className={props.currentPage === current}>
+                            className={props.currentPage === current && styles.selectedPage}>
                     {current} </span>)
             }
         </div>
